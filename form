@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIY Plumbing Feedback</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  margin: 0;
+  padding: 20px;
+  color: #fff;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.card {
+  background: #ffffff;
+  color: #111;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 500;
+  margin-top: 12px;
+  display: block;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+textarea {
+  min-height: 80px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row input {
+  flex: 1;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <h2>🧰 DIY Plumbing Feedback</h2>
+    <div class="subtitle">Help us improve & serve you better</div>
+
+    <form action="https://formsubmit.co/YOUR-EMAIL@gmail.com" method="POST">
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="New Plumbing Feedback">
+      <input type="hidden" name="_template" value="table">
+
+      <label>Name (optional)</label>
+      <input type="text" name="name">
+
+      <label>Have you faced plumbing issues before?</label>
+      <select name="experience">
+        <option>Yes, often</option>
+        <option>Yes, occasionally</option>
+        <option>Not yet, but worried</option>
+        <option>Never</option>
+      </select>
+
+      <label>Rate the workshop (1-5)</label>
+      <input type="number" name="rating" min="1" max="5">
+
+      <label>Confidence Level</label>
+      <div class="row">
+        <input type="number" name="before" placeholder="Before (1-5)" min="1" max="5">
+        <input type="number" name="after" placeholder="After (1-5)" min="1" max="5">
+      </div>
+
+      <label>Biggest takeaway</label>
+      <textarea name="takeaway"></textarea>
+
+      <label>Short testimonial</label>
+      <textarea name="testimonial" placeholder="This is super useful..."></textarea>
+
+      <label>Can we use your feedback for marketing?</label>
+      <select name="permission">
+        <option>Yes</option>
+        <option>Name only</option>
+        <option>No</option>
+      </select>
+
+      <button type="submit">Submit Feedback</button>
+
+    </form>
+
+    <div class="footer">
+      Built for real-world problem solving 💧
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
