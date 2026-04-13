@@ -126,43 +126,39 @@
             box-shadow: 0 0 0 3px rgba(255, 210, 90, 0.4);
         }
 
-        /* ===== 星星评分 - 简化版，确保5颗星都显示 ===== */
-        .star-rating {
+        .rating-wrapper {
             display: flex;
-            flex-direction: row;
-            gap: 8px;
-            align-items: center;
             flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
         }
 
-        .stars {
+        .rating-container {
             display: flex;
-            flex-direction: row;
-            gap: 5px;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 6px;
         }
 
-        .stars label {
-            font-size: 32px;
+        .rating-container input {
+            display: none;
+        }
+
+        .rating-container label {
+            font-size: 28px;
             color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: 0.15s;
             margin: 0;
-            padding: 0;
             line-height: 1;
         }
 
-        .stars label:hover,
-        .stars label:hover ~ label {
-            color: #ffb703;
-        }
-
-        .stars input:checked ~ label {
+        .rating-container label:hover,
+        .rating-container label:hover ~ label,
+        .rating-container input:checked ~ label {
             color: #ffb703;
             text-shadow: 0 0 4px #ffb703;
-        }
-
-        .stars input {
-            display: none;
         }
 
         .rating-text {
@@ -218,11 +214,26 @@
             h1 {
                 font-size: 1.4rem;
             }
-            .stars label {
-                font-size: 26px;
+            h1 i {
+                font-size: 1.3rem;
+            }
+            .rating-container label {
+                font-size: 24px;
             }
             .rating-text {
-                font-size: 0.65rem;
+                font-size: 0.7rem;
+                white-space: normal;
+            }
+            .rating-wrapper {
+                flex-wrap: wrap;
+            }
+            input, select, textarea {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+            button {
+                padding: 12px;
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -256,7 +267,7 @@
 
         <div class="form-group">
             <label><i class="fas fa-tools"></i> <span class="trans" data-en="Project Type" data-zh="维修项目">Project Type</span> <span class="required-star">*</span></label>
-            <select name="project_type" required>
+            <select name="project_type" required id="projectSelect">
                 <option value="" disabled selected data-en="-- Select a project --" data-zh="-- 请选择项目 --">-- Select a project --</option>
                 <option value="Replacing a tap washer" data-en="🔧 Replacing a tap washer" data-zh="🔧 更换水龙头垫圈">🔧 Replacing a tap washer</option>
                 <option value="Tightening pipe joints with PTFE tape" data-en="📐 Tightening pipe joints with PTFE tape" data-zh="📐 用生料带紧固管接头">📐 Tightening pipe joints with PTFE tape</option>
@@ -264,24 +275,23 @@
             </select>
         </div>
 
-        <!-- 星星评分 - 5颗星完整版 -->
         <div class="form-group">
             <label><i class="fas fa-star"></i> <span class="trans" data-en="Overall Rating" data-zh="整体评分">Overall Rating</span></label>
-            <div class="star-rating">
-                <div class="stars">
+            <div class="rating-wrapper">
+                <div class="rating-container">
                     <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
                     <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
                     <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
                     <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
                     <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
                 </div>
-                <span class="rating-text" id="ratingLabel">Click stars to rate</span>
+                <span class="rating-text" id="ratingLabel"><span class="trans" data-en="Click stars to rate" data-zh="点击星星评分">Click stars to rate</span></span>
             </div>
         </div>
 
+        <!-- 反馈区域 - 已删除 "你的反馈" 大字标签 -->
         <div class="form-group">
-            <label><i class="fas fa-pen-fancy"></i> <span class="trans" data-en="Your Feedback" data-zh="你的反馈">Your Feedback</span> <span class="required-star">*</span></label>
-            <textarea name="feedback" rows="4" data-en-placeholder="Describe your DIY experience..." data-zh-placeholder="描述你的DIY经验..." placeholder="Describe your DIY experience..." required></textarea>
+            <textarea name="feedback" rows="4" data-en-placeholder="Describe your DIY experience, what worked, what didn't..." data-zh-placeholder="描述你的DIY经验，哪些有效，哪些无效..." placeholder="Describe your DIY experience, what worked, what didn't..." required></textarea>
         </div>
 
         <button type="submit"><i class="fas fa-paper-plane"></i> <span class="trans" data-en="Submit Feedback" data-zh="提交反馈">Submit Feedback</span></button>
@@ -291,20 +301,19 @@
 </div>
 
 <script>
-    // 翻译数据
     const translations = {
         en: {
             nameLabel: 'Your Name', emailLabel: 'Email Address', projectLabel: 'Project Type',
-            ratingLabel: 'Overall Rating', feedbackLabel: 'Your Feedback', submit: 'Submit Feedback',
+            ratingLabel: 'Overall Rating', submit: 'Submit Feedback',
             footer: 'Your opinion helps more DIY enthusiasts', ratingDefault: 'Click stars to rate',
-            phName: 'e.g. John Doe', phEmail: 'your@email.com', phFeedback: 'Describe your DIY experience...',
+            phName: 'e.g. John Doe', phEmail: 'your@email.com', phFeedback: 'Describe your DIY experience, what worked, what didn\'t...',
             selectDefault: '-- Select a project --', opt1: '🔧 Replacing a tap washer', opt2: '📐 Tightening pipe joints with PTFE tape', opt3: '🚰 Removing and cleaning a trap'
         },
         zh: {
             nameLabel: '你的名字', emailLabel: '电子邮箱', projectLabel: '维修项目',
-            ratingLabel: '整体评分', feedbackLabel: '你的反馈', submit: '提交反馈',
+            ratingLabel: '整体评分', submit: '提交反馈',
             footer: '你的意见能帮助更多DIY爱好者', ratingDefault: '点击星星评分',
-            phName: '例如: 张三', phEmail: 'your@email.com', phFeedback: '描述你的DIY经验...',
+            phName: '例如: 张三', phEmail: 'your@email.com', phFeedback: '描述你的DIY经验，哪些有效，哪些无效...',
             selectDefault: '-- 请选择项目 --', opt1: '🔧 更换水龙头垫圈', opt2: '📐 用生料带紧固管接头', opt3: '🚰 拆卸并清洁存水弯'
         }
     };
@@ -316,28 +325,24 @@
 
     let currentLang = 'en';
 
-    // 更新评分文字
     function updateRatingText() {
         const checked = document.querySelector('input[name="rating"]:checked');
         const ratingSpan = document.getElementById('ratingLabel');
         if (checked) {
-            ratingSpan.textContent = ratingTexts[currentLang][parseInt(checked.value)];
+            ratingSpan.innerHTML = ratingTexts[currentLang][parseInt(checked.value)];
         } else {
-            ratingSpan.textContent = ratingTexts[currentLang].default;
+            ratingSpan.innerHTML = ratingTexts[currentLang].default;
         }
     }
 
-    // 绑定星星点击事件
     document.querySelectorAll('input[name="rating"]').forEach(radio => {
         radio.addEventListener('change', updateRatingText);
     });
 
-    // 切换语言
     function switchLanguage(lang) {
         currentLang = lang;
         const t = translations[lang];
 
-        // 更新所有带 trans 类的元素
         document.querySelectorAll('.trans').forEach(el => {
             if (lang === 'en' && el.getAttribute('data-en')) {
                 el.textContent = el.getAttribute('data-en');
@@ -346,23 +351,19 @@
             }
         });
 
-        // 更新 labels
         const labels = document.querySelectorAll('.form-group label');
         if (labels[0]) labels[0].innerHTML = `<i class="fas fa-user"></i> ${t.nameLabel} <span class="required-star">*</span>`;
         if (labels[1]) labels[1].innerHTML = `<i class="fas fa-envelope"></i> ${t.emailLabel}`;
         if (labels[2]) labels[2].innerHTML = `<i class="fas fa-tools"></i> ${t.projectLabel} <span class="required-star">*</span>`;
         if (labels[3]) labels[3].innerHTML = `<i class="fas fa-star"></i> ${t.ratingLabel}`;
-        if (labels[4]) labels[4].innerHTML = `<i class="fas fa-pen-fancy"></i> ${t.feedbackLabel} <span class="required-star">*</span>`;
+        // 反馈区域没有 label，所以跳过 labels[4]
 
-        // 更新按钮
         const btn = document.querySelector('button');
         if (btn) btn.innerHTML = `<i class="fas fa-paper-plane"></i> ${t.submit}`;
 
-        // 更新 footer
         const footer = document.querySelector('footer');
         if (footer) footer.innerHTML = `<i class="fas fa-shield-alt"></i> ${t.footer}`;
 
-        // 更新 placeholders
         const nameInput = document.querySelector('input[name="name"]');
         const emailInput = document.querySelector('input[name="email"]');
         const feedbackTextarea = document.querySelector('textarea[name="feedback"]');
@@ -370,7 +371,6 @@
         if (emailInput) emailInput.placeholder = t.phEmail;
         if (feedbackTextarea) feedbackTextarea.placeholder = t.phFeedback;
 
-        // 更新 select 选项
         const select = document.querySelector('select[name="project_type"]');
         if (select) {
             const options = select.querySelectorAll('option');
@@ -380,10 +380,8 @@
             if (options[3]) options[3].textContent = t.opt3;
         }
 
-        // 更新评分文字
         updateRatingText();
 
-        // 更新按钮高亮
         document.querySelectorAll('.lang-btn').forEach(btn => {
             if (btn.getAttribute('data-lang') === lang) {
                 btn.classList.add('active');
@@ -393,14 +391,12 @@
         });
     }
 
-    // 绑定语言切换按钮
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             switchLanguage(this.getAttribute('data-lang'));
         });
     });
 
-    // 表单验证
     const form = document.querySelector('form');
     form.addEventListener('submit', function(e) {
         const name = document.querySelector('input[name="name"]').value.trim();
