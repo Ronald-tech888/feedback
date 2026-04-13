@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY Plumbing Feedback</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0b3b5f, #1b7f8a);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 18px;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .lang-btn.active {
+            background: #ff6b35;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 22px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: white;
+            font-weight: 500;
+        }
+        label i {
+            margin-right: 8px;
+            color: #ffd166;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            font-family: 'Poppins', sans-serif;
+            border: none;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.95);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,210,90,0.5);
+        }
+        .rating-container {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 10px;
+            align-items: center;
+        }
+        .rating-container input {
+            display: none;
+        }
+        .rating-container label {
+            font-size: 30px;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        .rating-container label:hover,
+        .rating-container label:hover ~ label,
+        .rating-container input:checked ~ label {
+            color: #ffb703;
+        }
+        .rating-text {
+            margin-left: 12px;
+            color: white;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #ff8255;
+        }
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.7rem;
+            color: rgba(255,255,240,0.6);
+        }
+        .required-star {
+            color: #ffb347;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
+    <h1><i class="fas fa-wrench"></i> DIY Plumbing Feedback</h1>
+    <p class="subtitle"><i class="fas fa-comment-dots"></i> Share your DIY experience, help us improve</p>
+
+    <form action="https://formsubmit.co/purchasingpoweruser@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New DIY Plumbing Feedback">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_cc" value="midasmines@gmail.com,desmondsia.everlifestyle@gmail.com">
+        <input type="text" name="_honey" style="display:none">
+
+        <div class="form-group">
+            <label><i class="fas fa-user"></i> Your Name <span class="required-star">*</span></label>
+            <input type="text" name="name" placeholder="e.g. John Doe" required>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Email Address</label>
+            <input type="email" name="email" placeholder="your@email.com">
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-tools"></i> Project Type <span class="required-star">*</span></label>
+            <select name="project_type" required>
+                <option value="">-- Select a project --</option>
+                <option value="Replacing a tap washer">🔧 Replacing a tap washer</option>
+                <option value="Tightening pipe joints with PTFE tape">📐 Tightening pipe joints with PTFE tape</option>
+                <option value="Removing and cleaning a trap">🚰 Removing and cleaning a trap</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-star"></i> Overall Rating</label>
+            <div class="rating-container">
+                <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+                <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+                <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+                <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+                <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+                <span class="rating-text" id="ratingLabel">Click stars to rate</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-pen-fancy"></i> Your Feedback <span class="required-star">*</span></label>
+            <textarea name="feedback" rows="4" placeholder="Describe your experience..." required></textarea>
+        </div>
+
+        <button type="submit"><i class="fas fa-paper-plane"></i> Submit Feedback</button>
+    </form>
+    <footer><i class="fas fa-shield-alt"></i> Your opinion helps more DIY enthusiasts</footer>
+</div>
+
+<script>
+    const ratingTexts = {
+        en: {1:'Very Poor',2:'Not good',3:'Average',4:'Pretty good',5:'Excellent!',default:'Click stars to rate'},
+        zh: {1:'很差',2:'不太好',3:'一般般',4:'还不错',5:'太棒了！',default:'点击星星评分'}
+    };
+    let lang = 'en';
+    const ratingLabel = document.getElementById('ratingLabel');
+    document.querySelectorAll('input[name="rating"]').forEach(r => {
+        r.onclick = () => { ratingLabel.innerText = ratingTexts[lang][parseInt(r.value)] || ratingTexts[lang].default; };
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.onclick = () => {
+            lang = btn.getAttribute('data-lang');
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const trans = {en:{h1:'DIY Plumbing Feedback',sub:'Share your DIY experience, help us improve',name:'Your Name',email:'Email Address',project:'Project Type',rating:'Overall Rating',feedback:'Your Feedback',submit:'Submit Feedback',footer:'Your opinion helps more DIY enthusiasts',phName:'e.g. John Doe',phEmail:'your@email.com',phFeedback:'Describe your experience...',selectDefault:'-- Select a project --',opt1:'🔧 Replacing a tap washer',opt2:'📐 Tightening pipe joints with PTFE tape',opt3:'🚰 Removing and cleaning a trap'},zh:{h1:'DIY 水管维修反馈',sub:'分享你的维修经验，帮我们做得更好',name:'你的名字',email:'电子邮箱',project:'维修项目',rating:'整体评分',feedback:'你的反馈',submit:'提交反馈',footer:'你的意见能帮助更多DIY爱好者',phName:'例如: 张三',phEmail:'your@email.com',phFeedback:'描述你的经验...',selectDefault:'-- 请选择项目 --',opt1:'🔧 更换水龙头垫圈',opt2:'📐 用生料带紧固管接头',opt3:'🚰 拆卸并清洁存水弯'}};
+            document.querySelector('h1').innerHTML = `<i class="fas fa-wrench"></i> ${trans[lang].h1}`;
+            document.querySelector('.subtitle').innerHTML = `<i class="fas fa-comment-dots"></i> ${trans[lang].sub}`;
+            document.querySelectorAll('.form-group label')[0].innerHTML = `<i class="fas fa-user"></i> ${trans[lang].name} <span class="required-star">*</span>`;
+            document.querySelectorAll('.form-group label')[1].innerHTML = `<i class="fas fa-envelope"></i> ${trans[lang].email}`;
+            document.querySelectorAll('.form-group label')[2].innerHTML = `<i class="fas fa-tools"></i> ${trans[lang].project} <span class="required-star">*</span>`;
+            document.querySelectorAll('.form-group label')[3].innerHTML = `<i class="fas fa-star"></i> ${trans[lang].rating}`;
+            document.querySelectorAll('.form-group label')[4].innerHTML = `<i class="fas fa-pen-fancy"></i> ${trans[lang].feedback} <span class="required-star">*</span>`;
+            document.querySelector('button').innerHTML = `<i class="fas fa-paper-plane"></i> ${trans[lang].submit}`;
+            document.querySelector('footer').innerHTML = `<i class="fas fa-shield-alt"></i> ${trans[lang].footer}`;
+            document.querySelector('input[name="name"]').placeholder = trans[lang].phName;
+            document.querySelector('input[name="email"]').placeholder = trans[lang].phEmail;
+            document.querySelector('textarea').placeholder = trans[lang].phFeedback;
+            const opts = document.querySelectorAll('select option');
+            opts[0].textContent = trans[lang].selectDefault;
+            opts[1].textContent = trans[lang].opt1;
+            opts[2].textContent = trans[lang].opt2;
+            opts[3].textContent = trans[lang].opt3;
+            const checked = document.querySelector('input[name="rating"]:checked');
+            ratingLabel.innerText = checked ? ratingTexts[lang][parseInt(checked.value)] : ratingTexts[lang].default;
+        };
+    });
+</script>
+</body>
+</html>
