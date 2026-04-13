@@ -272,16 +272,17 @@
             <input type="email" id="email" name="email" data-en-placeholder="your@email.com (for reply)" data-zh-placeholder="your@email.com (用于回复)" placeholder="your@email.com (for reply)">
         </div>
 
+        <!-- Project Type - 3 个选项 -->
         <div class="form-group">
             <label><i class="fas fa-tools"></i> 
                 <span class="trans" data-en="Project Type" data-zh="维修项目">Project Type</span>
+                <span class="required-star">*</span>
             </label>
-            <select id="projectType" name="project_type">
-                <option value="Leaky Faucet" data-en="🚰 Leaky Faucet" data-zh="🚰 漏水龙头">🚰 Leaky Faucet</option>
-                <option value="Clogged Drain" selected data-en="🚽 Clogged Drain" data-zh="🚽 堵塞下水道">🚽 Clogged Drain</option>
-                <option value="Toilet Repair" data-en="🚽 Toilet Repair" data-zh="🚽 马桶维修">🚽 Toilet Repair</option>
-                <option value="Pipe Installation" data-en="🔧 Pipe Installation" data-zh="🔧 水管安装">🔧 Pipe Installation</option>
-                <option value="Water Heater" data-en="💧 Water Heater" data-zh="💧 热水器问题">💧 Water Heater</option>
+            <select id="projectType" name="project_type" required>
+                <option value="" disabled selected data-en="-- Select a project --" data-zh="-- 请选择项目 --">-- Select a project --</option>
+                <option value="Replacing a tap washer" data-en="🔧 Replacing a tap washer" data-zh="🔧 更换水龙头垫圈">🔧 Replacing a tap washer</option>
+                <option value="Tightening pipe joints with PTFE tape" data-en="📐 Tightening pipe joints with PTFE tape" data-zh="📐 用生料带紧固管接头">📐 Tightening pipe joints with PTFE tape</option>
+                <option value="Removing and cleaning a trap" data-en="🚰 Removing and cleaning a trap" data-zh="🚰 拆卸并清洁存水弯">🚰 Removing and cleaning a trap</option>
             </select>
         </div>
 
@@ -383,6 +384,7 @@
             }
         });
 
+        // 更新 select 选项的文本和默认占位选项
         document.querySelectorAll('#projectType option').forEach(opt => {
             if (lang === 'en' && opt.getAttribute('data-en')) {
                 opt.textContent = opt.getAttribute('data-en');
@@ -422,10 +424,12 @@
         const messages = {
             en: {
                 nameRequired: '❌ Please enter your name',
+                projectRequired: '❌ Please select a project type',
                 feedbackRequired: '❌ Please enter your feedback'
             },
             zh: {
                 nameRequired: '❌ 请填写你的名字',
+                projectRequired: '❌ 请选择维修项目',
                 feedbackRequired: '❌ 请填写反馈内容'
             }
         };
@@ -434,11 +438,18 @@
 
     form.addEventListener('submit', function(e) {
         const name = document.getElementById('name').value.trim();
+        const projectType = document.getElementById('projectType').value;
         const feedback = document.getElementById('feedbackText').value.trim();
         
         if (name === '') {
             e.preventDefault();
             alert(getValidationMessage('nameRequired'));
+            return false;
+        }
+        
+        if (projectType === '') {
+            e.preventDefault();
+            alert(getValidationMessage('projectRequired'));
             return false;
         }
         
@@ -449,7 +460,6 @@
         }
         
         // 验证通过，表单正常提交到 FormSubmit
-        // FormSubmit 会显示它的默认感谢页面
         return true;
     });
 </script>
